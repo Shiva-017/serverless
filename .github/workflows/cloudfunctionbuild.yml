@@ -14,7 +14,17 @@ jobs:
       
       - name: Zip Cloud Function code
         run: zip function.zip ./index.js ./package.json
+
+      - name: Decode JSON secret
+        run: |
+          echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode > data.json
+          cat data.json
       
+      - name: auth Google Cloud CLI
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: data.json
+          
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
