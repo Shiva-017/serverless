@@ -1,0 +1,27 @@
+name: Deploy Cloud Function
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-function:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Zip Cloud Function code
+        run: zip function.zip ./index.js ./package.json
+      
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+      
+      - name: Upload Zip to Cloud Storage
+        run: gsutil cp function.zip gs://${{ secrets.GCS_BUCKET }}/${{ github.sha }}-function.zip
+      
