@@ -1,2 +1,2 @@
 # serverless
-cloud function to verify email
+cloud function to verify emails
