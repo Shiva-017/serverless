@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  socketPath: `/cloudsql/webapp-dev-414902:us-east1:vpc1-cloudsql-instance`,
+  socketPath: process.env.SOCKET_PATH,
 });
 
 exports.verifyEmailFunction = async (pubSubEvent, context) => {
