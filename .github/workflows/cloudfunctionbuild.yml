@@ -15,10 +15,10 @@ jobs:
       - name: Zip Cloud Function code
         run: zip function.zip ./index.js ./package.json
 
-      - name: Decode JSON secret
-        id: decode_json
-        run: |
-          echo "GCP_SA_KEY=$(echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode)" >> $GITHUB_ENV
+      # - name: Decode JSON secret
+      #   id: decode_json
+      #   run: |
+      #     echo "GCP_SA_KEY=$(echo "${{ secrets.GCP_SA_KEY }}" | base64 --decode)" >> $GITHUB_ENV
       
       - name: auth Google Cloud CLI
         uses: google-github-actions/auth@v2
