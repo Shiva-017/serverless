@@ -19,7 +19,7 @@ exports.verifyEmailFunction = async (pubSubEvent, context) => {
     const { email, token, firstname: userName } = message;
 
     // Generate a verification link
-    const verificationLink = `http://shivadasi.me:3000/verify/${token}`;
+    const verificationLink = `https://shivadasi.me:443/verify/${token}`;
 
     const emailData = {
         from: 'Exciting WebApp <no-reply@yourdomain.com>',
